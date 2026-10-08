@@ -16,7 +16,10 @@ foreach ($s in $skills) {
   Copy-Item (Join-Path $root "skills/shared/ste-limits.json") $sharedDst
   Get-ChildItem -Recurse -Path $stage -Filter "__pycache__" -Directory | Remove-Item -Recurse -Force
   $out = Join-Path $dist ($s + ".skill")
+  $zip = Join-Path $dist ($s + ".zip")
   if (Test-Path $out) { Remove-Item -Force $out }
-  Compress-Archive -Path ($stage + "/*") -DestinationPath $out
+  if (Test-Path $zip) { Remove-Item -Force $zip }
+  Compress-Archive -Path ($stage + "/*") -DestinationPath $zip
+  Rename-Item -LiteralPath $zip -NewName ($s + ".skill")
   Write-Output "$s -> $out"
 }
