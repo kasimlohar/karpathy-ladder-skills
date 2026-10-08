@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Explainer — template (zero-CDN default)</title>
+<style>body{font-family:system-ui;max-width:720px;margin:2rem auto;padding:0 1rem}panel,section{border:1px solid #ccc;padding:1rem;margin:1rem 0}label{display:block;margin:.5rem 0}</style>
+<h1>What it is (STE draft)</h1>
+<p id="stedraft">Replace with 80% STE text. Keep every number and condition.</p>
+<section><h2>Try it</h2>
+<label>Retries <input id="retries" type="range" min="0" max="5" value="3"> <span id="rv">3</span></label>
+<p>Delay: <b id="out">—</b></p>
+</section>
+<section><h2>Guess first</h2>
+<label>Predict delay for 3rd retry (ms) <input id="guess" type="number"></label>
+<button id="reveal">Reveal</button>
+<p id="verdict"></p>
+</section>
+<section><h2>What to check</h2><ul><li>Assumption 1</li><li>Assumption 2</li><li>Source link</li></ul></section>
+<script>
+const base=100; const $=id=>document.getElementById(id);
+function delay(n){return base*Math.pow(2,n)}
+$('retries').oninput=e=>{$('rv').textContent=e.target.value;$('out').textContent=delay(+e.target.value)+' ms'};
+$('out').textContent=delay(3)+' ms';
+$('reveal').onclick=()=>{const g=+$('guess').value,a=delay(3);$('verdict').textContent=`You guessed ${g}. Actual 3rd retry = ${a} ms. ${g===a?'Match.':'Check math: 100*2^3.'}`};
+</script>
