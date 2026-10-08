@@ -2,6 +2,8 @@
 """validate_mermaid_full.py — primary mmdc parse, regex pre-check fallback (stdlib only).
 Every run reports which validator ran: "parse" (real mmdc render) or
 "pre-check only" (regex fallback). A pre-check pass is NEVER a parse pass.
+The real parse shells to npx @mermaid-js/mermaid-cli, which may download on
+first run (needs network once); without Node/npx it falls back to pre-check.
 Run with auto-detected Python: py -3 on Windows, else python3, else python.
 Usage: validate_mermaid_full.py diagram.mmd [--json] [--no-mmdc]
 """

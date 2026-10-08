@@ -15,7 +15,8 @@ Excalidraw JSON only if user explicitly asks.
 
 Validator lives at `scripts/validate_mermaid_full.py` (sibling of this SKILL.md;
 fallback `scripts/validate_mermaid.py`). Requires Node + npx on PATH for the
-real parse (`@mermaid-js/mermaid-cli` via npx cache, no install).
+real parse (`@mermaid-js/mermaid-cli` via npx — may download on first run,
+needs network once).
 Save one diagram per file (`diagram.mmd`); extra diagrams get numbered names.
 For `sequenceDiagram` alt/else branches, label each branch message after `:`.
 

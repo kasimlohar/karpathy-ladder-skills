@@ -10,7 +10,7 @@ see `<skill>/evals/results.md`.
 | ste-explain | 80% ASD-STE100 rewrite + `ste_check.py` | Python only (`py -3` / `python3` / `python` auto-detected) |
 | diagram-first | Validated Mermaid + edge list | Python + Node/npx for real parse (`@mermaid-js/mermaid-cli` via npx cache); regex pre-check fallback |
 | explorable-html | Single-file interactive explainer | Python for static check; browser audit via verify-ladder |
-| storyboard-video | Storyboard + narration + captions + plan | Python only — **video rendering UNTESTED** (no Manim/Showtime here) |
+| storyboard-video | Storyboard + narration + captions + 480p preview | Python + PIL + ffmpeg + local TTS. PIL/ffmpeg preview render tested; narration audio path, Manim, Remotion and Showtime untested. |
 | verify-ladder | Full audit: STE + edges + HTML + video script | Python + Node + puppeteer-core + Chrome for headless HTML audit |
 | understanding-ladder | Thin router (lowest sufficient rung) | No tools (delegates) |
 
@@ -36,8 +36,10 @@ See `shared/UPDATE.md` for how to re-verify against a newer Issue 9+ PDF.
 
 ## What is UNTESTED
 
-- Video rendering (Manim `-pql`/`-pqh`, Remotion, Showtime): no renderer is
-  installed here; storyboard-video outputs storyboard + script + plan only.
+- Video rendering: PIL/ffmpeg preview render tested; narration audio path,
+  Manim, Remotion and Showtime untested (no such renderer installed or run
+  here; storyboard-video outputs storyboard + script + plan plus an optional
+  local preview mp4).
 - Headless HTML audit outside this machine: needs `puppeteer-core` + a Chrome
   binary (`CHROME_PATH`, `PUPPETEER_MOD` envs override the defaults baked in
   `verify-ladder/scripts/audit_html.js`); without them it reports

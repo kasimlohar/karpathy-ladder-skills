@@ -28,7 +28,7 @@ or flagged (safety verbatim, drift lock, slider clamp, hedge, number-swap).
 - STE: `ste_check.py` reading `shared/ste-limits.json` (`verified:true`;
   numbers confirmed from the Issue 9 PDF, see `shared/UPDATE.md`).
 - Diagrams: `validate_mermaid_full.py` → `validator:parse` via mmdc 12.0.0
-  (npx cache, no install) on every eval; regex `validate_mermaid.py` kept as
+  (npx — may download on first run, needs network once) on every eval; regex `validate_mermaid.py` kept as
   fallback (`validator:pre-check only`, caps verify at WITH-NITS).
 - HTML: `audit_html.js` → `browser:ran` (puppeteer-core + cached Chrome) on
   template + planted fixtures: zero console errors on clean, caught thrown
@@ -50,7 +50,8 @@ or flagged (safety verbatim, drift lock, slider clamp, hedge, number-swap).
 
 Run the three never-run original evals (eviction-step, sort-compare,
 local-only) plus a fresh-agent retest of triggering case G, and record in
-`evals/results.md`. After that, the highest-value work is an HTML-inclusive
+each skill's own `evals/results.md` (`skills/<name>/evals/results.md` —
+there is no repo-level `evals/results.md`). After that, the highest-value work is an HTML-inclusive
 end-to-end (the current e2e had no HTML artifact, so the browser audit never
 gated a chain).
 

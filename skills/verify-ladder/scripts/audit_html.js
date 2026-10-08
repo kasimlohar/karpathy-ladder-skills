@@ -66,8 +66,16 @@ function staticChecks(html) {
 }
 
 (async () => {
+  const args = process.argv.slice(2);
+  if (args.includes('--help') || args.includes('-h') || !process.argv[2]) {
+    console.log('usage: node audit_html.js explainer.html [--json]');
+    console.log('Checks: console errors, external requests, controls present,');
+    console.log('first range/checkbox control changes output. Static checks always');
+    console.log('run; browser part needs puppeteer-core + Chrome (CHROME_PATH /');
+    console.log('PUPPETEER_MOD envs). Reports browser:ran|unavailable.');
+    process.exit(0);
+  }
   const file = process.argv[2];
-  if (!file) { console.error('usage: node audit_html.js explainer.html [--json]'); process.exit(2); }
   const html = fs.readFileSync(file, 'utf8');
   const staticErrs = staticChecks(html);
   const puppeteer = loadPuppeteer();

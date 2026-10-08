@@ -32,21 +32,33 @@ Capabilities → Skills to upload.
 
 ## Skills
 
-| Skill | Status | Needs |
+| Skill | Status (run / not run) | Needs |
 |---|---|---|
-| ste-explain | tested (7/7 vs 1/7 baseline) | Python only |
-| diagram-first | tested (7/7 vs 1/7) | Python + Node/npx for real parse, else pre-check |
-| explorable-html | tested (6/6 vs 1/6) | Python; browser audit via verify-ladder |
-| storyboard-video | tested (preview render) | Python + PIL + ffmpeg + local TTS; 90s 854x480 preview with narration verified |
-| verify-ladder | tested (10/10 vs 2/6) | Python + Node + puppeteer-core + Chrome for HTML audit |
-| understanding-ladder | tested (7/7 vs 1/7) | None (routes only) |
+| ste-explain | 7/7 run | Python only |
+| diagram-first | 7/7 run | Python + Node/npx for real parse, else pre-check |
+| explorable-html | 6/6 run, 1 not run (eviction-step) | Python; browser audit via verify-ladder |
+| storyboard-video | 6/8 run (sort-compare, local-only not run). PIL/ffmpeg preview render tested; narration audio path, Manim, Remotion and Showtime untested. | Python + PIL + ffmpeg + local TTS |
+| verify-ladder | 10/10 run | Python + Node + puppeteer-core + Chrome for HTML audit |
+| understanding-ladder | 7/7 run | None (routes only) |
+
+Never run anywhere: mmdc-unavailable and browser-unavailable fallback paths
+in eval conditions, non-Windows machines, non-Chrome browsers, Showtime
+integration, Chinese output.
 
 ## Known limits
 
-- Preview render proven once: 90s 854x480 mp4 (PIL frames + ffmpeg, Windows
-  SAPI narration, check_render 0 errors). Full-quality renders (Manim `-pqh`,
-  Remotion, Showtime) are still untested.
+- Preview render proven once on Windows: 90s 854x480 mp4 (PIL frames +
+  ffmpeg, SAPI narration, check_render 0 errors). The narration audio path
+  outside that setup, and full-quality renders (Manim, Remotion, Showtime),
+  are still untested.
 - Mermaid/HTML checks are pre-checks unless the run reports `parse` / `browser:ran`.
 - ASD dictionary not bundled (advisory subset only); numeric limits verified
   from Issue 9 — see `skills/shared/UPDATE.md`.
 - Details, pass rates, and fragile assertions: `docs/FINAL-REPORT.md`.
+- The evals check rule-following against a no-skill baseline, not whether
+  readers understand better. The planted-error tests in verify-ladder (every
+  one BLOCKed) are the strongest evidence.
+- The ASD-STE100 numbers cannot be checked from this repo alone. Check them
+  against your own Issue 9 copy (see `skills/shared/UPDATE.md`).
+- `scripts/pack.ps1` deletes files only inside its own temp stage folders and
+  the repo `dist/` folder (path-guarded); it never touches skills or docs.

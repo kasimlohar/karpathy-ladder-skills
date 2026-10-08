@@ -5,10 +5,19 @@
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $PSCommandPath)
 $dist = Join-Path $root "dist"
+$tmpBase = [System.IO.Path]::GetTempPath()
+function Assert-Inside($path, $base, $what) {
+  $full = [System.IO.Path]::GetFullPath($path)
+  if (-not $full.StartsWith([System.IO.Path]::GetFullPath($base), [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw "refusing to touch $what outside its base: $full"
+  }
+}
+Assert-Inside $dist $root "dist"
 New-Item -ItemType Directory -Path $dist -Force | Out-Null
 $skills = @("ste-explain", "diagram-first", "explorable-html", "storyboard-video", "verify-ladder", "understanding-ladder")
 foreach ($s in $skills) {
-  $stage = Join-Path ([System.IO.Path]::GetTempPath()) ("pack-" + $s)
+  $stage = Join-Path $tmpBase ("pack-" + $s)
+  Assert-Inside $stage $tmpBase "stage"
   if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
   Copy-Item -Recurse (Join-Path $root ("skills/" + $s)) $stage
   $sharedDst = Join-Path $stage "shared"

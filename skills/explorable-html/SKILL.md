@@ -57,7 +57,6 @@ HTML does not apply.
 ## References
 
 - `references/template.html` — minimal starter (sliders + reveal).
-- `references/patterns.md` — slider, step-through, guess-first snippets.
 
 ## Known failure modes
 
