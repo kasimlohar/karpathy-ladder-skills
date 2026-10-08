@@ -10,19 +10,25 @@ Anthropic. "ASD-STE100" is a trademark of ASD (Aerospace, Security and Defence
 Industries Association of Europe); no spec text or dictionary is reproduced
 here. Request the free official PDF at https://www.asd-ste100.org/.
 
-## Install (5 lines)
+## Install
 
 ```bash
-git clone <this-repo> && cd <repo>
+npx skills add kasimlohar/karpathy-ladder-skills
+```
+
+Or clone: `git clone https://github.com/kasimlohar/karpathy-ladder-skills.git`.
+`npx skills add` installs only skill folders — copy `skills/shared/` next to
+them for verified limits (`ste_check.py` falls back to built-in defaults
+without it; `ste-explain` bundles a copy). Fallback for Claude Code:
+
+```bash
 cp -r skills/ste-explain skills/diagram-first ~/.claude/skills/
 cp -r skills/explorable-html skills/storyboard-video ~/.claude/skills/
 cp -r skills/verify-ladder skills/understanding-ladder skills/shared ~/.claude/skills/
-python3 ~/.claude/skills/ste-explain/scripts/ste_check.py --help
 ```
 
-Keep `shared/` next to the skills (`ste_check.py` falls back to built-in
-defaults without it). Or unpack release `.skill` zips (each bundles
-`shared/ste-limits.json`; see `scripts/pack.ps1`).
+claude.ai: download the `.skill` files from Releases, then Settings →
+Capabilities → Skills to upload.
 
 ## Skills
 

@@ -1,6 +1,6 @@
 ---
 name: storyboard-video
-description: Draft storyboard.md, 80% STE narration, captions, and local render plan for bespoke 3Blue1Brown-style explainer videos. Use directly when the user asks for a video or storyboard — storyboard first, render only after verification, local voice by default. NOTE: video rendering is untested here (no Manim/Showtime); outputs are storyboard + script + plan only. If the best format is unclear, prefer the understanding-ladder router instead.
+description: "Draft storyboard.md, 80% STE narration, captions, and local render plan for bespoke 3Blue1Brown-style explainer videos. Use directly when the user asks for a video or storyboard — storyboard first, render only after verification, local voice by default. NOTE: video rendering is untested here (no Manim/Showtime); outputs are storyboard + script + plan only. If the best format is unclear, prefer the understanding-ladder router instead."
 ---
 
 # Storyboard-Video — storyboard first, local render plan (RENDERING UNTESTED)
