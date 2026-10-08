@@ -37,13 +37,15 @@ Capabilities → Skills to upload.
 | ste-explain | tested (7/7 vs 1/7 baseline) | Python only |
 | diagram-first | tested (7/7 vs 1/7) | Python + Node/npx for real parse, else pre-check |
 | explorable-html | tested (6/6 vs 1/6) | Python; browser audit via verify-ladder |
-| storyboard-video | partly tested (5/5 storyboard; render untested) | Python only; no Manim/Showtime here |
+| storyboard-video | tested (preview render) | Python + PIL + ffmpeg + local TTS; 90s 854x480 preview with narration verified |
 | verify-ladder | tested (10/10 vs 2/6) | Python + Node + puppeteer-core + Chrome for HTML audit |
 | understanding-ladder | tested (7/7 vs 1/7) | None (routes only) |
 
 ## Known limits
 
-- No real video rendering has been run anywhere in this repo.
+- Preview render proven once: 90s 854x480 mp4 (PIL frames + ffmpeg, Windows
+  SAPI narration, check_render 0 errors). Full-quality renders (Manim `-pqh`,
+  Remotion, Showtime) are still untested.
 - Mermaid/HTML checks are pre-checks unless the run reports `parse` / `browser:ran`.
 - ASD dictionary not bundled (advisory subset only); numeric limits verified
   from Issue 9 — see `skills/shared/UPDATE.md`.

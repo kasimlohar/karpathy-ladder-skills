@@ -39,7 +39,9 @@ see provenance field). Run scripts with auto-detected Python
    `audit_video_script.py --narration narration.txt --captions captions.srt
    --claims claims.md --source source.txt --json`. Requires: narration equals
    captions, >=3 checkable claims, every claim number present in source
-   (else contradiction flag), no keys in files.
+   (else contradiction flag), no keys in files. If a rendered mp4 exists,
+   additionally run `../../storyboard-video/scripts/check_render.py preview.mp4
+   storyboard.md --expect-audio|--expect-silent` and require 0 errors.
 6. **Spot-checks.** List 3 surprising claims. Verify each to original source.
    If source missing, mark BLOCK.
 7. **Verdict.** ALWAYS end with one line:
@@ -61,7 +63,7 @@ If fewer than 3 natural claims exist, check all and note the count.
 - Terms: ...
 - Edges (validator=...): ...
 - HTML (browser=...): ... / n/a
-- Video script: ... / n/a
+- Video script: ... / n/a (plus render check if mp4 exists)
 - Spot-checks: 1... 2... 3...
 
 ## Fixes required

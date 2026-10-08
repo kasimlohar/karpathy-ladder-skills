@@ -1,0 +1,3 @@
+frames=1350 fps=15 total_shots=8 storyboard_seconds=90.0
+TTS=local SAPI, narration tracks=8
+silent=False out=skills\storyboard-video\evals\artifacts\preview.mp4 seconds=90.0

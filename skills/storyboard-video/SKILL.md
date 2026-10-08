@@ -1,15 +1,14 @@
 ---
 name: storyboard-video
-description: "Draft storyboard.md, 80% STE narration, captions, and local render plan for bespoke 3Blue1Brown-style explainer videos. Use directly when the user asks for a video or storyboard — storyboard first, render only after verification, local voice by default. NOTE: video rendering is untested here (no Manim/Showtime); outputs are storyboard + script + plan only. If the best format is unclear, prefer the understanding-ladder router instead."
+description: "Draft storyboard.md, 80% STE narration, captions, and render a 480p preview mp4 for bespoke explainer videos. Use directly when the user asks for a video or storyboard — storyboard first, preview render with check_render.py, local voice by default. NOTE: tested preview path is PIL frames + ffmpeg + local TTS only; Manim/Remotion/Showtime renders are still untested. If the best format is unclear, prefer the understanding-ladder router instead."
 ---
 
-# Storyboard-Video — storyboard first, local render plan (RENDERING UNTESTED)
+# Storyboard-Video — storyboard first, tested 480p preview
 
-Video rendering is UNTESTED in this environment: neither Manim nor Showtime
-is installed, and no preview render has been run. This skill outputs
-storyboard + narration + captions + render plan only. Do not claim a video
-was rendered. To enable rendering, install Manim or Showtime, run one
-`manim -pql` preview, save `render.log`, and remove this notice.
+Tested preview path (90s sample, check_render 0 errors): `render_preview.py`
+builds 854x480@15fps PIL text+shape frames, muxes with ffmpeg, narrates with
+local system TTS. Manim/Remotion/Showtime renders are still UNTESTED — do not
+claim them. Preview proves the storyboard-to-mp4 pipeline, not visual quality.
 
 No API keys in prompts or files. Default to local TTS. Never claim endorsement
 or size figures without render logs. 34GB-type figures are excluded.
@@ -27,10 +26,12 @@ or size figures without render logs. 34GB-type figures are excluded.
    Read script without watching; list 3 surprising claims; verify to source.
 3. **Visuals as code.** Manim Scene for math, Remotion composition for React,
    or Showtime `--from-storyboard` (0.4.0+ reads table directly). Never diffusion-only.
-4. **Render plan (test mode: storyboard-only).** Per user decision, tests validate
-   storyboard + narration + captions only — no video render required.
-   For real runs: preview low first (`manim -pql` 480p15 or Remotion preview),
-   then final (`manim -pqh` 1080p60 or `renderMedia h264`). Log resolution/fps/codec/size.
+4. **Preview render (tested).** Run `render_preview.py storyboard.md --out
+   preview.mp4` (auto-detected Python; needs PIL + ffmpeg; local SAPI/system
+   TTS when present, else silent-with-captions and reported). Then run
+   `check_render.py preview.mp4 storyboard.md --expect-audio|--expect-silent`.
+   Full-quality Manim/Remotion/Showtime renders remain untested — use the
+   tested preview path unless the user explicitly provides a renderer.
 5. **Voice.** Local Kokoro (or system TTS) by default. ElevenLabs only if key
    already in env/credential store — read from env, never paste in prompt.
    Note logging default per vendor docs.
@@ -48,6 +49,8 @@ or size figures without render logs. 34GB-type figures are excluded.
 
 - Storyboard shots ≤12, lengths sum to target ±15s.
 - `scripts/check_storyboard.py` passes (columns, narration length, captions match).
+- `scripts/check_render.py` passes on the preview mp4 (duration ±15%,
+  854x480, audio iff narration requested, no black frames).
 - TTS text equals captions; no key in files (`grep -ri elevenlabs|api.key` clean).
 - Read-script-before-watch checklist signed.
 

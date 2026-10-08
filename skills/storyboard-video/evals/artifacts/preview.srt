@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:10,000
+You must find one value in a sorted list. A full scan is slow for large data. Binary search halves the range.
+
+2
+00:00:10,000 --> 00:00:22,000
+The rule is simple. Order tells you which half to keep. Compare the target with the middle value. Keep only the half that can hold the target.
+
+3
+00:00:22,000 --> 00:00:34,000
+Use three markers. Low marks the start of the range. High marks the end of the range. Mid is half way between low and high.
+
+4
+00:00:34,000 --> 00:00:44,000
+Check the value at mid. If it matches, stop. If the target is greater, move low up. If less, move high down.
+
+5
+00:00:44,000 --> 00:00:56,000
+Watch an example. Target is seven. Range is one to fifteen. Mid is eight. Eight is greater than seven, so move high down. The range is smaller.
+
+6
+00:00:56,000 --> 00:01:08,000
+Repeat the step. New mid is four. Four is less than seven, so move low up. The range halves again. Each step discards half of the values.
+
+7
+00:01:08,000 --> 00:01:18,000
+After three steps, mid is seven. It matches the target. You stop the search. Three steps replace up to fifteen checks.
+
+8
+00:01:18,000 --> 00:01:30,000
+Time grows slowly. Double the size adds one step only. One million items need about twenty steps. That is the power of halving. It needs sorted data.

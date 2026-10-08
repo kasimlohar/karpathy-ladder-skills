@@ -1,0 +1,20 @@
+{
+  "errors": [],
+  "duration": 90.0,
+  "storyboard_seconds": 90.0,
+  "shots": 8,
+  "width": 854,
+  "height": 480,
+  "audio_streams": 1,
+  "video_codec": "h264",
+  "frame_brightness": [
+    27.0,
+    29.7,
+    34.3
+  ],
+  "frames": [
+    "frame-1.png",
+    "frame-2.png",
+    "frame-3.png"
+  ]
+}

@@ -1,0 +1,8 @@
+You must find one value in a sorted list. A full scan is slow for large data. Binary search halves the range.
+The rule is simple. Order tells you which half to keep. Compare the target with the middle value. Keep only the half that can hold the target.
+Use three markers. Low marks the start of the range. High marks the end of the range. Mid is half way between low and high.
+Check the value at mid. If it matches, stop. If the target is greater, move low up. If less, move high down.
+Watch an example. Target is seven. Range is one to fifteen. Mid is eight. Eight is greater than seven, so move high down. The range is smaller.
+Repeat the step. New mid is four. Four is less than seven, so move low up. The range halves again. Each step discards half of the values.
+After three steps, mid is seven. It matches the target. You stop the search. Three steps replace up to fifteen checks.
+Time grows slowly. Double the size adds one step only. One million items need about twenty steps. That is the power of halving. It needs sorted data.
